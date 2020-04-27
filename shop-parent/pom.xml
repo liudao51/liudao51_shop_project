@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+    </parent>
+
+    <groupId>com.liudao51.shop</groupId>
+    <artifactId>shop-parent</artifactId>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 项目子模块 -->
+    <modules>
+        <module>../shop-common</module>
+        <module>../shop-entity</module>
+        <!--<module>../shop-order-web</module>
+        <module>../shop-coupon-service</module>
+        <module>../shop-user-service</module>
+        <module>../shop-order-service</module>
+        <module>../shop-pay-web</module>
+        <module>../shop-goods-service</module>
+        <module>../shop-pay-service</module>-->
+    </modules>
+
+    <!-- 统一版本控制 -->
+    <properties>
+        <dubbo-spring-boot-starter.version>2.7.3</dubbo-spring-boot-starter.version>
+    </properties>
+
+    <!-- 被子模块继承的依赖包 -->
+    <dependencies>
+        <!-- spring-boot-stater -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 统一管理依赖包的版本 -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.6</version>
+            </dependency>
+
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>2.7.3</version>
+            </dependency>
+            <!--<dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.7.3</version>
+            </dependency>-->
+
+            <!--zookeeper-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>2.7.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>0.9</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--RocketMQ-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.47</version>
+            </dependency>
+
+            <!-- org.json -->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20180813</version>
+            </dependency>
+
+            <!-- commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.9</version>
+            </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>27.0.1-jre</version>
+            </dependency>
+
+            <!-- shop-common -->
+            <dependency>
+                <groupId>com.liudao51.shop</groupId>
+                <artifactId>shop-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <target>1.8</target>
+                    <source>1.8</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
