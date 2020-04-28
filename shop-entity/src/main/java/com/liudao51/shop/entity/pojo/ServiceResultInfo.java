@@ -6,9 +6,9 @@ import com.liudao51.shop.common.util.StringUtilsX;
 import java.io.Serializable;
 
 /**
- * 客户端响应结果实体类
+ * 服务生产者端响应结果实体类
  */
-public class ResponseResultInfo<T> implements Serializable {
+public class ServiceResultInfo<T> implements Serializable {
 
     // 状态码
     private Integer code;
@@ -19,11 +19,11 @@ public class ResponseResultInfo<T> implements Serializable {
     // 数据内容
     private T data;
 
-    public ResponseResultInfo() {
+    public ServiceResultInfo() {
     }
 
     // 返回处理具体结果(成功或失败)
-    public ResponseResultInfo(ErrorCode errorCode) {
+    public ServiceResultInfo(ErrorCode errorCode) {
         this.code = (errorCode != null
                 && errorCode.getCode() != null
                 && !StringUtilsX.isBlank(errorCode.getCode().toString())
@@ -40,7 +40,7 @@ public class ResponseResultInfo<T> implements Serializable {
     }
 
     // 返回处理具体结果(成功或失败)
-    public ResponseResultInfo(Integer code, String message) {
+    public ServiceResultInfo(Integer code, String message) {
         this.code = (code != null
                 && !StringUtilsX.isBlank(code.toString())
         ) ? code : ErrorCode.FAIL.getCode();
@@ -88,7 +88,7 @@ public class ResponseResultInfo<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "ResponseResultInfo={"
+        return "ServiceResultInfo={"
                 + "code:" + this.code
                 + ", message:'" + this.message
                 + ", timestamp:'" + this.timestamp
