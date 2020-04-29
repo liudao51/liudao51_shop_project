@@ -1,13 +1,12 @@
-package com.liudao51.shop.entity.po;
+package com.liudao51.shop.entity.vo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * 数据库表商品实体类
+ * 客户端商品实体类
  */
-public class TradeGoods implements Serializable {
+public class TradeGoodsVo {
+
     private Long goodsId;
 
     private String goodsName;
@@ -17,8 +16,6 @@ public class TradeGoods implements Serializable {
     private BigDecimal goodsPrice;
 
     private String goodsDesc;
-
-    private Date addTime;
 
     public Long getGoodsId() {
         return goodsId;
@@ -33,7 +30,7 @@ public class TradeGoods implements Serializable {
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public Integer getGoodsNumber() {
@@ -57,14 +54,6 @@ public class TradeGoods implements Serializable {
     }
 
     public void setGoodsDesc(String goodsDesc) {
-        this.goodsDesc = goodsDesc == null ? null : goodsDesc.trim();
-    }
-
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
+        this.goodsDesc = goodsDesc;
     }
 }
