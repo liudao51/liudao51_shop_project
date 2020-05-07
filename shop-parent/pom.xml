@@ -18,13 +18,15 @@
     <modules>
         <module>../shop-common</module>
         <module>../shop-entity</module>
-        <!--<module>../shop-order-web</module>
+        <module>../shop-facade</module>
+        <module>../shop-order-service</module>
+        <!--
         <module>../shop-coupon-service</module>
         <module>../shop-user-service</module>
-        <module>../shop-order-service</module>
         <module>../shop-pay-web</module>
         <module>../shop-goods-service</module>
-        <module>../shop-pay-service</module>-->
+        <module>../shop-pay-service</module>
+        -->
     </modules>
 
     <!-- 统一版本控制 -->
@@ -71,7 +73,6 @@
     <!-- 统一管理依赖包的版本 -->
     <dependencyManagement>
         <dependencies>
-
             <!-- junit -->
             <dependency>
                 <groupId>junit</groupId>
@@ -163,10 +164,32 @@
                 <version>27.0.1-jre</version>
             </dependency>
 
+            <!-- 内部项目包 -->
             <!-- shop-common -->
             <dependency>
                 <groupId>com.liudao51.shop</groupId>
                 <artifactId>shop-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- shop-entity -->
+            <dependency>
+                <groupId>com.liudao51.shop</groupId>
+                <artifactId>shop-entity</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- shop-facade -->
+            <dependency>
+                <groupId>com.liudao51.shop</groupId>
+                <artifactId>shop-facade</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- shop-order-service -->
+            <dependency>
+                <groupId>com.liudao51.shop</groupId>
+                <artifactId>shop-order-service</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
