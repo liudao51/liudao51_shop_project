@@ -11,8 +11,8 @@
     <groupId>com.liudao51.shop</groupId>
     <artifactId>shop-parent</artifactId>
     <packaging>pom</packaging>
-    <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
 
     <!-- 项目子模块 -->
     <modules>
@@ -93,11 +93,11 @@
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>2.7.3</version>
             </dependency>
-            <!--<dependency>
+            <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>2.7.3</version>
-            </dependency>-->
+            </dependency>
 
             <!--zookeeper-->
             <dependency>
@@ -197,16 +197,22 @@
 
     <build>
         <plugins>
+            <!-- spring-boot-maven-plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <target>1.8</target>
-                    <source>1.8</source>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
 
+        <pluginManagement>
+            <plugins>
+                <!-- spring-boot-maven-plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.0.3.RELEASE</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

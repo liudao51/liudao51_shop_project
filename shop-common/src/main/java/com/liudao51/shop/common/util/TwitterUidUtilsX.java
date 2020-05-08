@@ -173,7 +173,7 @@ public class TwitterUidUtilsX {
     /**
      * 测试
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // 构造方法设置机器码：第9个机房的第20台机器
         TwitterUidUtilsX idWorker = new TwitterUidUtilsX(9, 20);
         for (int i = 0; i < 1000; i++) {
@@ -181,5 +181,5 @@ public class TwitterUidUtilsX {
             System.out.println(Long.toBinaryString(id));
             System.out.println(id);
         }
-    }
+    }*/
 }

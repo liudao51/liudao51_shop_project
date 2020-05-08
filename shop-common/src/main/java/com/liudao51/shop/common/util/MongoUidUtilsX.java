@@ -582,10 +582,4 @@ public final class MongoUidUtilsX implements Comparable<MongoUidUtilsX>, Seriali
         return (byte) (x);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new MongoUidUtilsX().toHexString());
-        System.out.println(new MongoUidUtilsX().toHexString());
-        System.out.println(new MongoUidUtilsX().toHexString());
-    }
-
 }

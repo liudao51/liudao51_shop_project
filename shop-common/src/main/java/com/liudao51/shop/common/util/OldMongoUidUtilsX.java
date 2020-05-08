@@ -248,10 +248,4 @@ public class OldMongoUidUtilsX implements Comparable<OldMongoUidUtilsX>, java.io
         return Objects.hashCode(serialVersionUID, LOGGER, _time, _machine, _inc, _new,
                 _nextInc, _genmachine);
     }
-
-    public static void main(String[] args) {
-        System.out.println(new OldMongoUidUtilsX().toHexString());
-        System.out.println(new OldMongoUidUtilsX().toHexString());
-        System.out.println(new OldMongoUidUtilsX().toHexString());
-    }
 }
