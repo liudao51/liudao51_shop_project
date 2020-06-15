@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(locations = {"classpath:dubbo/provider1.xml"})
-public class OrderServiceApplication {
+@ImportResource(locations = {"classpath:dubbo/shop-order-dubbo.xml"})
+public class ShopOrderServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OrderServiceApplication.class, args);
-        System.out.println("shop-order-service模块项目启动成功...");
+        SpringApplication.run(ShopOrderServiceApplication.class, args);
+        System.out.println("shop-order-service 模块启动成功...");
     }
 }

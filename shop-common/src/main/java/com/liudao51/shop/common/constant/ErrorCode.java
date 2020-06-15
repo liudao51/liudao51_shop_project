@@ -47,8 +47,10 @@ public enum ErrorCode {
     USER_UPDATE_ERROR(21013, "用户更新失败"),
     USER_DELETE_ERROR(21014, "用户删除失败"),
 
-    ORDER_ORDER_SN_ERROR(22001, "订单号错误"),
-    ORDER_REPEAT_PAY_ERROR(22002, "订单重复支付"),
+    ORDER_ORDER_INVALID_ERROR(22001, "订单无效"),
+    ORDER_ORDER_NOT_EXIST_ERROR(22002, "订单不存在"),
+    ORDER_ORDER_SN_ERROR(22003, "订单号错误"),
+    ORDER_REPEAT_PAY_ERROR(22004, "订单重复支付"),
 
     STREAM_FILE_FORMAT_ERROR(30001, "文件格式错误"),
 

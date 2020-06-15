@@ -16,7 +16,7 @@ public class TradeUser implements Serializable {
 
     private Date userRegTime;
 
-    private Long userMoney;
+    private Double userMoney;
 
     public Long getUserId() {
         return userId;
@@ -66,11 +66,11 @@ public class TradeUser implements Serializable {
         this.userRegTime = userRegTime;
     }
 
-    public Long getUserMoney() {
+    public Double getUserMoney() {
         return userMoney;
     }
 
-    public void setUserMoney(Long userMoney) {
+    public void setUserMoney(Double userMoney) {
         this.userMoney = userMoney;
     }
 }
