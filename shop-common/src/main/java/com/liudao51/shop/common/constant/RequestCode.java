@@ -2,7 +2,7 @@ package com.liudao51.shop.common.constant;
 
 import java.io.Serializable;
 
-public class RequestConstant {
+public class RequestCode {
     /**
      * TODO: Api计算签名算法类型
      *

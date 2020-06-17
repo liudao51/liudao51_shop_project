@@ -6,6 +6,7 @@ import com.liudao51.shop.mapper.TradeGoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Map;
  * Created by jewel on 2020/6/15.
  */
 @Component
-public class ITradeGoodsDao implements ITradeUserDao {
+public class TradeUserDaoImpl implements ITradeUserDao {
 
     @Autowired
     TradeGoodsMapper tradeUserMapper;
@@ -27,5 +28,10 @@ public class ITradeGoodsDao implements ITradeUserDao {
     @Override
     public TradeUser selectOne(Map args) {
         return tradeUserMapper.selectOne(args);
+    }
+
+    @Override
+    public List<TradeUser> selectList(Map<String, Object> args) {
+        return tradeUserMapper.selectList(args);
     }
 }

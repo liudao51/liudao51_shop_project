@@ -52,7 +52,7 @@
                     <!--增加jvm参数-->
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
                     <!-- 当为spring-boot项目时,必须要指定该Main Class为全局的唯一入口, 用于作为命令行《java -jar xxx.jar》启动项目时的入口文件 -->
-                    <mainClass>com.liudao51.shop.CommonApplication</mainClass>
+                    <mainClass>com.liudao51.shop.ShopCommonApplication</mainClass>
                     <!--
                         因为springboot项目打包的时候会生成两个jar包：一个是普通可被引用的jar包，另一个是springboot的可执行但不可以被别的模块引用的jar包。
                         但由于默认普通jar与可执行jar包命名相同,从而导致普通jar包被可执行jar包覆盖,最终导致该模块的jar包不能被别的模块引用。

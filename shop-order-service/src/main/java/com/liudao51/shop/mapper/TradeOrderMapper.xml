@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liudao51.shop.mapper.TradeOrderMapper">
+
+    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeOrder">
+        SELECT
+            a.order_id,
+            a.user_id,
+            a.order_status,
+            a.pay_status,
+            a.shipping_status,
+            a.address,
+            a.consignee,
+            a.goods_id,
+            a.goods_number,
+            a.goods_price,
+            a.goods_amount,
+            a.shipping_fee,
+            a.order_amount,
+            a.coupon_id,
+            a.coupon_paid,
+            a.money_paid,
+            a.pay_amount,
+            a.add_time,
+            a.confirm_time,
+            a.pay_time
+        FROM trade_order AS a
+        WHERE 1=1
+        <choose>
+            <when test="parameter.order_id != null and parameter.order_id != ''">
+                AND a.order_id=#{parameter.order_id}
+            </when>
+            <otherwise>
+                AND a.order_id='-1'
+            </otherwise>
+        </choose>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectOne" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeOrder">
+        SELECT
+            a.order_id,
+            a.user_id,
+            a.order_status,
+            a.pay_status,
+            a.shipping_status,
+            a.address,
+            a.consignee,
+            a.goods_id,
+            a.goods_number,
+            a.goods_price,
+            a.goods_amount,
+            a.shipping_fee,
+            a.order_amount,
+            a.coupon_id,
+            a.coupon_paid,
+            a.money_paid,
+            a.pay_amount,
+            a.add_time,
+            a.confirm_time,
+            a.pay_time
+        FROM trade_order AS a
+        WHERE 1=1
+        <if test="parameter.order_id != null and parameter.order_id != ''">
+            AND a.order_id=#{parameter.order_id}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectList" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeOrder">
+        SELECT
+            a.order_id,
+            a.user_id,
+            a.order_status,
+            a.pay_status,
+            a.shipping_status,
+            a.address,
+            a.consignee,
+            a.goods_id,
+            a.goods_number,
+            a.goods_price,
+            a.goods_amount,
+            a.shipping_fee,
+            a.order_amount,
+            a.coupon_id,
+            a.coupon_paid,
+            a.money_paid,
+            a.pay_amount,
+            a.add_time,
+            a.confirm_time,
+            a.pay_time
+        FROM trade_order AS a
+    </select>
+
+    <insert id="insert" parameterType="com.liudao51.shop.entity.po.TradeOrder">
+        INSERT INTO trade_order (
+            order_id, user_id, order_status,
+            pay_status, shipping_status, address,
+            consignee, goods_id, goods_number,
+            goods_price, goods_amount, shipping_fee,
+            order_amount, coupon_id, coupon_paid,
+            money_paid, pay_amount, add_time,
+            confirm_time, pay_time
+        )
+        VALUES (
+            #{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderStatus,jdbcType=INTEGER},
+            #{payStatus,jdbcType=INTEGER}, #{shippingStatus,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+            #{consignee,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsNumber,jdbcType=INTEGER},
+            #{goodsPrice,jdbcType=DECIMAL}, #{goodsAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL},
+            #{orderAmount,jdbcType=DECIMAL}, #{couponId,jdbcType=BIGINT}, #{couponPaid,jdbcType=DECIMAL},
+            #{moneyPaid,jdbcType=DECIMAL}, #{payAmount,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP},
+            #{confirmTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+</mapper>

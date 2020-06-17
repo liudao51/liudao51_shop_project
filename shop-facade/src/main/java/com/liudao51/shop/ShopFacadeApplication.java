@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommonApplication {
+public class ShopFacadeApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CommonApplication.class, args);
-        System.out.println("shop-common模块项目启动成功...");
+        SpringApplication.run(ShopFacadeApplication.class, args);
+        System.out.println("shop-facade 模块启动成功...");
     }
 }

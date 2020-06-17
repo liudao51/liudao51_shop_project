@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EntityApplication {
+public class ShopEntityApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EntityApplication.class, args);
-        System.out.println("shop-entity模块项目启动成功...");
+        SpringApplication.run(ShopEntityApplication.class, args);
+        System.out.println("shop-entity 模块启动成功...");
     }
 }
