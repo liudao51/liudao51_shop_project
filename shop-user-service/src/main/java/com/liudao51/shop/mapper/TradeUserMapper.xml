@@ -13,9 +13,14 @@
             a.user_money
         FROM trade_user AS a
         WHERE 1=1
-        <if test="parameter.user_id!=null and parameter.user_id!=''">
-            AND a.user_id=#{parameter.user_id}
-        </if>
+        <choose>
+            <when test="parameter.user_id != null and parameter.user_id != ''">
+                AND a.user_id=#{parameter.user_id}
+            </when>
+            <otherwise>
+                AND a.user_id='-1'
+            </otherwise>
+        </choose>
         LIMIT 0,1
     </select>
 

@@ -5,7 +5,7 @@
 
     <!--1、指定当前服务应用的名字（同样的服务名字相同，不要和其它的服务同名）-->
     <!--通过<dubbo:application>标签指定了服务应用的名字, 就不需要在application.properties文件中加入dubbo.application.name设置了-->
-    <dubbo:application name="shop-order-dubbo"/>
+    <dubbo:application name="shop-goods-dubbo"/>
 
     <!--2、指定注册中心的位置（注册中心不同，服务地址的写法不同）-->
     <!--通过<dubbo:registry>标签指定了注册中心, 就不需要在application.properties文件中加入dubbo.registry.address设置了-->
@@ -15,22 +15,18 @@
 
     <!--3、指定通信协议及端口（服务提供者开放端口20880给消费者使用; 如果只配置消费者是不需要写的）-->
     <!--通过<dubbo:protocol>标签指定了协议, 就不需要在application.properties文件中加入dubbo.protocol.name,dubbo.protocol.port设置了-->
-    <dubbo:protocol name="dubbo" port="28721"/>
+    <dubbo:protocol name="dubbo" port="28723"/>
 
     <!--4、指定需要调用的远程服务提供者接口（该id值可以与提供者不一样）-->
     <!--通过<dubbo:reference>标签指定了容器bean, 就不需要在Controller类中加入@org.apache.dubbo.config.annotation.Reference引入bean了,
         直接使用@org.springframework.beans.factory.annotation.Autowired引入bean即可-->
-    <dubbo:reference id="userService" version="1.0.0"
+    <!--<dubbo:reference id="userService" version="1.0.0"
                      interface="com.liudao51.shop.facade.IUserService"
-                     check="false" timeout="10000"/>
-
-    <dubbo:reference id="goodsService" version="1.0.0"
-                     interface="com.liudao51.shop.facade.IGoodsService"
-                     check="false" timeout="10000"/>
+                     check="false" timeout="10000" />-->
 
     <!--5、指定需要暴露的服务提供者接口（该id值可以与消费者不一样）-->
     <!--通过<dubbo:service>标签指定了容器bean, 就不需要在Service类中加入@org.apache.dubbo.config.annotation.Service注解了-->
-    <dubbo:service id="orderService" version="1.0.0"
-                   interface="com.liudao51.shop.facade.IOrderService"
-                   class="com.liudao51.shop.service.impl.OrderServiceImpl"/>
+    <dubbo:service id="goodsService" version="1.0.0"
+                   interface="com.liudao51.shop.facade.IGoodsService"
+                   class="com.liudao51.shop.service.impl.GoodsServiceImpl"/>
 </beans>

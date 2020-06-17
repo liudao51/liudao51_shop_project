@@ -15,7 +15,7 @@ public enum ErrorCode {
      * 20xxx - 请求相关,
      * 21xxx - 用户相关,
      * 22xxx - 订单相关,
-     * 23xxx - 商品券相关,
+     * 23xxx - 商品相关,
      * 24xxx - 支付券相关,
      * 25xxx - 优惠券相关,
      * 30xxx - IO读写相关,
@@ -47,10 +47,14 @@ public enum ErrorCode {
     USER_UPDATE_ERROR(21013, "用户更新失败"),
     USER_DELETE_ERROR(21014, "用户删除失败"),
 
-    ORDER_ORDER_INVALID_ERROR(22001, "订单无效"),
-    ORDER_ORDER_NOT_EXIST_ERROR(22002, "订单不存在"),
+    ORDER_INVALID_ERROR(22001, "订单无效"),
+    ORDER_NOT_EXIST_ERROR(22002, "订单不存在"),
     ORDER_ORDER_SN_ERROR(22003, "订单号错误"),
     ORDER_REPEAT_PAY_ERROR(22004, "订单重复支付"),
+
+    GOODS_INVALID_ERROR(21001, "商品无效"),
+    GOODS_NOT_EXITS_ERROR(21002, "商品不存在"),
+
 
     STREAM_FILE_FORMAT_ERROR(30001, "文件格式错误"),
 

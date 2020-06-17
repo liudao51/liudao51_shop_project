@@ -2,7 +2,7 @@ package com.liudao51.shop.dao.impl;
 
 import com.liudao51.shop.dao.ITradeUserDao;
 import com.liudao51.shop.entity.po.TradeUser;
-import com.liudao51.shop.mapper.TradeUserMapper;
+import com.liudao51.shop.mapper.TradeGoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +14,10 @@ import java.util.Map;
  * Created by jewel on 2020/6/15.
  */
 @Component
-public class TradeUserDaoImpl implements ITradeUserDao {
+public class ITradeGoodsDao implements ITradeUserDao {
 
     @Autowired
-    TradeUserMapper tradeUserMapper;
+    TradeGoodsMapper tradeUserMapper;
 
     @Override
     public TradeUser selectById(Map args) {

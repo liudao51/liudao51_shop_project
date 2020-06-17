@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liudao51.shop.mapper.TradeGoodsMapper">
+
+    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoods">
+        SELECT
+            a.goods_id,
+            a.goods_name,
+            a.goods_number,
+            a.goods_price,
+            a.goods_desc,
+            a.add_time
+        FROM trade_goods AS a
+        WHERE 1=1
+        <choose>
+            <when test="parameter.goods_id != null and parameter.goods_id != ''">
+                AND a.goods_id=#{parameter.goods_id}
+            </when>
+            <otherwise>
+                AND a.goods_id='-1'
+            </otherwise>
+        </choose>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectOne" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoods">
+        SELECT
+            a.goods_id,
+            a.goods_name,
+            a.goods_number,
+            a.goods_price,
+            a.goods_desc,
+            a.add_time
+        FROM trade_goods AS a
+        WHERE 1=1
+        <if test="parameter.goods_id != null and parameter.goods_id != ''">
+            AND a.goods_id=#{parameter.goods_id}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectList" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoods">
+        SELECT
+            a.goods_id,
+            a.goods_name,
+            a.goods_number,
+            a.goods_price,
+            a.goods_desc,
+            a.add_time
+        FROM trade_goods AS a
+    </select>
+</mapper>
