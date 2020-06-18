@@ -22,9 +22,9 @@
         <module>../shop-order-service</module>
         <module>../shop-user-service</module>
         <module>../shop-goods-service</module>
+        <module>../shop-coupon-service</module>
 
         <!--
-        <module>../shop-coupon-service</module>
         <module>../shop-pay-web</module>
         <module>../shop-pay-service</module>
         -->

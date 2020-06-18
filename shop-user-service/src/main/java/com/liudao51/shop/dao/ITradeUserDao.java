@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户数据访问接口类
+ * 用户Dao接口类
  */
 public interface ITradeUserDao {
     TradeUser selectById(Map<String, Object> args);

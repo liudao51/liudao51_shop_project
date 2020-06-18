@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @Mapper
 @Repository
-public interface TradeGoodsMapper {
+public interface TradeUserMapper {
 
     TradeUser selectById(@Param("parameter") Map<String, Object> args);
 

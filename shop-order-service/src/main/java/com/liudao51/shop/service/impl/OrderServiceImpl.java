@@ -3,13 +3,13 @@ package com.liudao51.shop.service.impl;
 import com.liudao51.shop.common.constant.AppCode;
 import com.liudao51.shop.common.constant.ErrorCode;
 import com.liudao51.shop.common.exception.ExceptionUtilsX;
+import com.liudao51.shop.common.util.NumericUtilsX;
 import com.liudao51.shop.common.util.ObjectUtilsX;
 import com.liudao51.shop.common.util.UidUtilsX;
 import com.liudao51.shop.dao.ITradeOrderDao;
-import com.liudao51.shop.entity.po.TradeGoods;
-import com.liudao51.shop.entity.po.TradeOrder;
-import com.liudao51.shop.entity.po.TradeUser;
+import com.liudao51.shop.entity.po.*;
 import com.liudao51.shop.entity.pojo.ResponseResultInfo;
+import com.liudao51.shop.facade.ICouponService;
 import com.liudao51.shop.facade.IGoodsService;
 import com.liudao51.shop.facade.IOrderService;
 import com.liudao51.shop.facade.IUserService;
@@ -32,6 +32,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private IGoodsService goodsService;
+
+    @Autowired
+    private ICouponService couponService;
 
     @Autowired
     private ITradeOrderDao orderDao;
@@ -69,7 +72,7 @@ public class OrderServiceImpl implements IOrderService {
 
         //5.校验订单商品数量是否合法
         if (preOrder.getGoodsNumber() >= goods.getGoodsNumber()) {
-            ExceptionUtilsX.cast(ErrorCode.GOODS_STOCK_NOT_ENOUGH);
+            ExceptionUtilsX.cast(ErrorCode.GOODS_NUMBER_NOT_ENOUGH_ERROR);
         }
 
         //商品总价
@@ -86,20 +89,29 @@ public class OrderServiceImpl implements IOrderService {
             shippingFee = new BigDecimal(10);
         }
         if (preOrder.getShippingFee().compareTo(shippingFee) != 0) {
-            ExceptionUtilsX.cast(ErrorCode.ORDER_SHIPPINGFEE_INVALID);
+            ExceptionUtilsX.cast(ErrorCode.ORDER_SHIPPINGFEE_INVALID_ERROR);
         }
         //7.校验订单优惠
         BigDecimal discount = new BigDecimal(0);
+        if (NumericUtilsX.isNumeric(preOrder.getCouponId())) {
+            TradeCoupon coupon = couponService.selectById(preOrder.getCouponId());
+            if (ObjectUtilsX.isEmpty(coupon)) { //优惠券不存在
+                ExceptionUtilsX.cast(ErrorCode.COUPON_NOT_EXIST_ERROR);
+            }
+            if (coupon.getIsUsed().intValue() == AppCode.COUPON_IS_USED.getCode()) { //优惠券已经被使用
+                ExceptionUtilsX.cast(ErrorCode.COUPON_IS_USED_ERROR);
+            }
+            if (preOrder.getCouponPaid().compareTo(coupon.getCouponPrice()) != 0) { //优惠券面额与订单优惠券金额不一致
+                ExceptionUtilsX.cast(ErrorCode.COUPON_MONEY_ERROR);
+            }
+            discount = discount.add(coupon.getCouponPrice());
+        }
 
         //8.校验订单总金额（订单总金额=商品总金额+运费-优惠）
         orderAmount = goodsAmount.add(shippingFee).subtract(discount);
         if (preOrder.getOrderAmount().compareTo(orderAmount) != 0) {
-            ExceptionUtilsX.cast(ErrorCode.ORDER_AMOUNT_INVALID);
+            ExceptionUtilsX.cast(ErrorCode.ORDER_AMOUNT_INVALID_ERROR);
         }
-
-        //9.校验订单用户余额
-
-        //10.校验订单剩余需支付金额
 
         //订单校验通过
         isValid = true;
@@ -135,6 +147,26 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     /**
+     * 扣减库存
+     *
+     * @param order
+     */
+    private Boolean reduceGoodsStock(TradeOrder order) {
+        TradeGoodsNumberLog goodsNumberLog = new TradeGoodsNumberLog();
+        goodsNumberLog.setOrderId(order.getOrderId());
+        goodsNumberLog.setGoodsId(order.getGoodsId());
+        goodsNumberLog.setGoodsNumber(order.getGoodsNumber());
+
+        ResponseResultInfo reduceGoodsStockResult = goodsService.reduceGoodsStock(goodsNumberLog);
+
+        if (reduceGoodsStockResult.getCode().equals(AppCode.APP_FAIL.getCode())) {
+            ExceptionUtilsX.cast(ErrorCode.GOODS_NUMBER_REDUCE_FAIL_ERROR);
+        }
+
+        return true;
+    }
+
+    /**
      * 确认订单
      *
      * @param preOrder
@@ -147,25 +179,27 @@ public class OrderServiceImpl implements IOrderService {
         if (!isValid) {
             ExceptionUtilsX.cast(ErrorCode.ORDER_INVALID_ERROR);
         }
+        log.info("订单校验通过");
 
         //2.创建预订单
         TradeOrder order = this.createPreOrder(preOrder);
         if (ObjectUtilsX.isEmpty(order)) {
             ExceptionUtilsX.cast(ErrorCode.ORDER_CREATE_PRE_ORDER_ERROR);
         }
+        log.info("订单:" + order.getOrderId() + ", 创建预订单成功");
 
         //3.扣减库存
+        this.reduceGoodsStock(order);
+        log.info("订单:" + order.getOrderId() + "扣减库存成功");
 
         //4.扣减优惠
 
-        //5.扣减用户余额
+        //5.确认订单
 
-        //6.确认订单
+        //5-1.确认成功
 
-        //6-1.确认成功
+        //5-2.确认失败
 
-        //6-2.确认失败
-
-        return null;
+        return new ResponseResultInfo<>(ErrorCode.SUCCESS);
     }
 }

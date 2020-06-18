@@ -7,8 +7,11 @@ public enum AppCode {
 
     ORDER_NO_CONFIRM(0, "订单未确认"),
 
-    APP_SUCCESS(1,"成功"),
-    APP_FAIL(0,"失败");
+    COUPON_IS_USED(1, "优惠券已经使用"),
+    COUPON_IS_UNUSED(0, "优惠券未使用"),
+
+    APP_SUCCESS(0, "成功"),
+    APP_FAIL(1, "失败");
 
     private Integer code;
     private String message;
