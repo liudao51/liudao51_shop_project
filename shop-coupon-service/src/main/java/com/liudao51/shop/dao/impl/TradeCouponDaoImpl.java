@@ -19,8 +19,13 @@ public class TradeCouponDaoImpl implements ITradeCouponDao {
     TradeCouponMapper tradeCouponMapper;
 
     @Override
-    public TradeCoupon selectById(Map<String, Object> args) {
-        return tradeCouponMapper.selectById(args);
+    public Integer updateById(TradeCoupon coupon) {
+        return tradeCouponMapper.updateById(coupon);
+    }
+
+    @Override
+    public TradeCoupon selectById(TradeCoupon coupon) {
+        return tradeCouponMapper.selectById(coupon);
     }
 
     @Override

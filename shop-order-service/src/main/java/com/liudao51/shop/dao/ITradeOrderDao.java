@@ -9,11 +9,14 @@ import java.util.Map;
  * 订单Dao接口类
  */
 public interface ITradeOrderDao {
-    TradeOrder selectById(Map<String, Object> args);
+    Integer insertById(TradeOrder order);
+
+    Integer updateById(TradeOrder order);
+
+    TradeOrder selectById(TradeOrder order);
 
     TradeOrder selectOne(Map<String, Object> args);
 
     List<TradeOrder> selectList(Map<String, Object> args);
 
-    int insert(TradeOrder order);
 }

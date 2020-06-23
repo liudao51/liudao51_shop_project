@@ -1,8 +1,11 @@
 package com.liudao51.shop.entity.po;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Data
 public class TradePay implements Serializable {
     private Long payId;
 
@@ -12,35 +15,7 @@ public class TradePay implements Serializable {
 
     private Integer isPaid;
 
-    public Long getPayId() {
-        return payId;
-    }
+    private Long createTime;
 
-    public void setPayId(Long payId) {
-        this.payId = payId;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public BigDecimal getPayAmount() {
-        return payAmount;
-    }
-
-    public void setPayAmount(BigDecimal payAmount) {
-        this.payAmount = payAmount;
-    }
-
-    public Integer getIsPaid() {
-        return isPaid;
-    }
-
-    public void setIsPaid(Integer isPaid) {
-        this.isPaid = isPaid;
-    }
+    private Long updateTime;
 }

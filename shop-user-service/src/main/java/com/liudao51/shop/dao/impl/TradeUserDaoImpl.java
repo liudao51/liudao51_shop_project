@@ -19,8 +19,8 @@ public class TradeUserDaoImpl implements ITradeUserDao {
     TradeUserMapper tradeUserMapper;
 
     @Override
-    public TradeUser selectById(Map args) {
-        return tradeUserMapper.selectById(args);
+    public TradeUser selectById(TradeUser user) {
+        return tradeUserMapper.selectById(user);
     }
 
     @Override

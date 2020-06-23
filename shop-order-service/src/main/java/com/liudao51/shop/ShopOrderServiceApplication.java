@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(locations = {"classpath:dubbo/shop-order-dubbo.xml"})
+@ImportResource(locations = {"classpath:dubbo/shop-order-service-dubbo.xml"})
 public class ShopOrderServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ShopOrderServiceApplication.class, args);

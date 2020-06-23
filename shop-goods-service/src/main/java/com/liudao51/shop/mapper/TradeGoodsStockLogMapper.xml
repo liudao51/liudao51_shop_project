@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liudao51.shop.mapper.TradeGoodsStockLogMapper">
+
+    <insert id="insertById" parameterType="com.liudao51.shop.entity.po.TradeGoodsStockLog">
+        INSERT INTO trade_goods_stock_log (
+            goods_stock_id, goods_id, order_id,
+            goods_stock, create_time, update_time
+        ) VALUES (
+            #{parameter.goodsStockId,jdbcType=BIGINT}, #{parameter.goodsId,jdbcType=BIGINT}, #{parameter.orderId,jdbcType=BIGINT},
+            #{parameter.goodsStock,jdbcType=INTEGER}, #{parameter.createTime,jdbcType=BIGINT}, #{parameter.updateTime,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeGoodsStockLog" resultType="com.liudao51.shop.entity.po.TradeGoodsStockLog">
+        SELECT
+            a.goods_stock_id,
+            a.goods_id,
+            a.order_id,
+            a.goods_stock,
+            a.create_time,
+            a.update_time
+        FROM trade_goods_stock_log AS a
+        WHERE 1=1
+        <choose>
+            <when test="parameter.goodsStockId != null and parameter.goodsStockId != '' or parameter.goodsStockId == 0">
+                AND a.goods_stock_id=#{parameter.goodsStockId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                AND a.goods_stock_id=0
+            </otherwise>
+        </choose>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectOne" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoodsStockLog">
+        SELECT
+            a.goods_stock_id,
+            a.goods_id,
+            a.order_id,
+            a.goods_stock,
+            a.create_time,
+            a.update_time
+        FROM trade_goods_stock_log AS a
+        WHERE 1=1
+        <if test="parameter.goods_stock_id != null and parameter.goods_stock_id != '' or parameter.goods_stock_id == 0">
+            AND a.goods_stock_id=#{parameter.goods_stock_id}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectList" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoodsStockLog">
+        SELECT
+            a.goods_stock_id,
+            a.goods_id,
+            a.order_id,
+            a.goods_stock,
+            a.create_time,
+            a.update_time
+        FROM trade_goods_stock_log AS a
+    </select>
+</mapper>

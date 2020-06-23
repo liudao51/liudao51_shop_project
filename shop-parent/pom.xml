@@ -19,13 +19,12 @@
         <module>../shop-common</module>
         <module>../shop-entity</module>
         <module>../shop-facade</module>
-        <module>../shop-order-service</module>
-        <module>../shop-user-service</module>
-        <module>../shop-goods-service</module>
-        <module>../shop-coupon-service</module>
-
+        <module>../shop-order-service</module><!-- 端口:8721 -->
+        <module>../shop-user-service</module><!-- 端口:8722 -->
+        <module>../shop-goods-service</module><!-- 端口:8723 -->
+        <module>../shop-coupon-service</module><!-- 端口:8724 -->
+        <module>../shop-order-web</module><!-- 端口:8821 -->
         <!--
-        <module>../shop-pay-web</module>
         <module>../shop-pay-service</module>
         -->
     </modules>
@@ -153,7 +152,7 @@
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
-                <version>2.0.3</version>
+                <version>2.1.0</version>
             </dependency>
 
             <!-- fastjson -->
@@ -197,6 +196,13 @@
                 <groupId>com.liudao51.shop</groupId>
                 <artifactId>shop-entity</artifactId>
                 <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!--spring-webmvc-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.0.3.RELEASE</version>
             </dependency>
 
             <!-- shop-facade -->

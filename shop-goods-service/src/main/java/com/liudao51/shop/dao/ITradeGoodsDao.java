@@ -9,7 +9,10 @@ import java.util.Map;
  * 商品Dao接口类
  */
 public interface ITradeGoodsDao {
-    TradeGoods selectById(Map<String, Object> args);
+
+    Integer updateById(TradeGoods goods);
+
+    TradeGoods selectById(TradeGoods goods);
 
     TradeGoods selectOne(Map<String, Object> args);
 

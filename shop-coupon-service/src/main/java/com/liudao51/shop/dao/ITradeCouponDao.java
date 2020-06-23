@@ -9,7 +9,9 @@ import java.util.Map;
  * 优惠券Dao接口类
  */
 public interface ITradeCouponDao {
-    TradeCoupon selectById(Map<String, Object> args);
+    Integer updateById(TradeCoupon coupon);
+
+    TradeCoupon selectById(TradeCoupon coupon);
 
     TradeCoupon selectOne(Map<String, Object> args);
 

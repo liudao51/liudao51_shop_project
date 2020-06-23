@@ -2,23 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liudao51.shop.mapper.TradeUserMapper">
 
-    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeUser">
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeUser" resultType="com.liudao51.shop.entity.po.TradeUser">
         SELECT
             a.user_id,
             a.user_name,
             a.user_password,
             a.user_mobile,
             a.user_score,
-            a.user_reg_time,
-            a.user_money
+            a.user_money,
+            a.create_time,
+            a.update_time
         FROM trade_user AS a
         WHERE 1=1
         <choose>
-            <when test="parameter.user_id != null and parameter.user_id != ''">
-                AND a.user_id=#{parameter.user_id}
+            <when test="parameter.userId != null and parameter.userId != '' or parameter.userId == 0">
+                AND a.user_id=#{parameter.userId,jdbcType=BIGINT}
             </when>
             <otherwise>
-                AND a.user_id='-1'
+                AND a.user_id=0
             </otherwise>
         </choose>
         LIMIT 0,1
@@ -26,16 +27,17 @@
 
     <select id="selectOne" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeUser">
         SELECT
-            a.user_id,
-            a.user_name,
-            a.user_password,
-            a.user_mobile,
-            a.user_score,
-            a.user_reg_time,
-            a.user_money
+        a.user_id,
+        a.user_name,
+        a.user_password,
+        a.user_mobile,
+        a.user_score,
+        a.user_money,
+        a.create_time,
+        a.update_time
         FROM trade_user AS a
         WHERE 1=1
-        <if test="parameter.user_id!=null and parameter.user_id!=''">
+        <if test="parameter.user_id!=null and parameter.user_id!='' or parameter.user_id == 0">
             AND a.user_id=#{parameter.user_id}
         </if>
         LIMIT 0,1
@@ -48,8 +50,9 @@
             a.user_password,
             a.user_mobile,
             a.user_score,
-            a.user_reg_time,
-            a.user_money
+            a.user_money,
+            a.create_time,
+            a.update_time
         FROM trade_user AS a
     </select>
 </mapper>

@@ -2,22 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liudao51.shop.mapper.TradeCouponMapper">
 
-    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeCoupon">
+    <update id="updateById" parameterType="com.liudao51.shop.entity.po.TradeCoupon">
+        UPDATE trade_coupon
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parameter.couponPrice != null and parameter.couponPrice != '' or parameter.couponPrice == 0">coupon_price = #{parameter.couponPrice,jdbcType=DECIMAL},</if>
+            <if test="parameter.userId != null and parameter.userId != '' or parameter.userId == 0">user_id = #{parameter.userId,jdbcType=BIGINT},</if>
+            <if test="parameter.orderId != null and parameter.orderId != '' or parameter.orderId == 0">order_id = #{parameter.orderId,jdbcType=BIGINT},</if>
+            <if test="parameter.useStatus != null and parameter.useStatus != '' or parameter.useStatus == 0">use_status = #{parameter.useStatus,jdbcType=INTEGER},</if>
+            <if test="parameter.useTime != null and parameter.useTime != '' or parameter.useTime == 0">use_time = #{parameter.useTime,jdbcType=BIGINT},</if>
+            <if test="parameter.updateTime != null and parameter.updateTime != '' or parameter.updateTime == 0">update_time = #{parameter.updateTime,jdbcType=BIGINT},</if>
+        </trim>
+        WHERE
+        <choose>
+            <when test="parameter.couponId != null and parameter.couponId != '' or parameter.couponId == 0">
+                coupon_id=#{parameter.couponId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                coupon_id=0
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeCoupon" resultType="com.liudao51.shop.entity.po.TradeCoupon">
         SELECT
             a.coupon_id,
             a.coupon_price,
             a.user_id,
             a.order_id,
-            a.is_used,
-            a.used_time
+            a.use_status,
+            a.use_time,
+            a.create_time,
+            a.update_time
         FROM trade_coupon AS a
         WHERE 1=1
         <choose>
-            <when test="parameter.coupon_id != null and parameter.coupon_id != ''">
-                AND a.coupon_id=#{parameter.coupon_id}
+            <when test="parameter.couponId != null and parameter.couponId != '' or parameter.couponId == 0">
+                AND a.coupon_id=#{parameter.couponId,jdbcType=BIGINT}
             </when>
             <otherwise>
-                AND a.coupon_id='-1'
+                AND a.coupon_id=0
             </otherwise>
         </choose>
         LIMIT 0,1
@@ -29,11 +52,13 @@
             a.coupon_price,
             a.user_id,
             a.order_id,
-            a.is_used,
-            a.used_time
+            a.use_status,
+            a.use_time,
+            a.create_time,
+            a.update_time
         FROM trade_coupon AS a
         WHERE 1=1
-        <if test="parameter.coupon_id!=null and parameter.coupon_id!=''">
+        <if test="parameter.coupon_id!=null and parameter.coupon_id!='' or parameter.coupon_id == 0">
             AND a.coupon_id=#{parameter.coupon_id}
         </if>
         LIMIT 0,1
@@ -45,8 +70,10 @@
             a.coupon_price,
             a.user_id,
             a.order_id,
-            a.is_used,
-            a.used_time
+            a.use_status,
+            a.use_time,
+            a.create_time,
+            a.update_time
         FROM trade_coupon AS a
     </select>
 </mapper>

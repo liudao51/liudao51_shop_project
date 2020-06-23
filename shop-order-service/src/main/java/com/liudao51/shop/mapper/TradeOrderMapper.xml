@@ -2,7 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liudao51.shop.mapper.TradeOrderMapper">
 
-    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeOrder">
+    <insert id="insertById" parameterType="com.liudao51.shop.entity.po.TradeOrder">
+        INSERT INTO trade_order (
+            order_id, user_id, order_status,
+            pay_status, shipping_status, address,
+            consignee, goods_id, goods_number,
+            goods_price, goods_amount, shipping_fee,
+            order_amount, coupon_id, coupon_paid,
+            money_paid, pay_amount, pay_time,
+            confirm_time, create_time, update_time
+        )
+        VALUES (
+            #{parameter.orderId,jdbcType=BIGINT}, #{parameter.userId,jdbcType=BIGINT}, #{parameter.orderStatus,jdbcType=INTEGER},
+            #{parameter.payStatus,jdbcType=INTEGER}, #{parameter.shippingStatus,jdbcType=INTEGER}, #{parameter.address,jdbcType=VARCHAR},
+            #{parameter.consignee,jdbcType=VARCHAR}, #{parameter.goodsId,jdbcType=BIGINT}, #{parameter.goodsNumber,jdbcType=INTEGER},
+            #{parameter.goodsPrice,jdbcType=DECIMAL}, #{parameter.goodsAmount,jdbcType=DECIMAL}, #{parameter.shippingFee,jdbcType=DECIMAL},
+            #{parameter.orderAmount,jdbcType=DECIMAL}, #{parameter.couponId,jdbcType=BIGINT}, #{parameter.couponPaid,jdbcType=DECIMAL},
+            #{parameter.moneyPaid,jdbcType=DECIMAL}, #{parameter.payAmount,jdbcType=DECIMAL}, #{parameter.payTime,jdbcType=BIGINT},
+            #{parameter.confirmTime,jdbcType=BIGINT}, #{parameter.createTime,jdbcType=BIGINT}, #{parameter.updateTime,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <update id="updateById" parameterType="com.liudao51.shop.entity.po.TradeOrder">
+        UPDATE trade_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parameter.userId != null and parameter.userId != '' or parameter.userId == 0">user_id = #{parameter.userId,jdbcType=BIGINT},</if>
+            <if test="parameter.orderStatus != null and parameter.orderStatus != '' or parameter.orderStatus == 0">order_status = #{parameter.orderStatus,jdbcType=INTEGER},</if>
+            <if test="parameter.payStatus != null and parameter.payStatus != '' or parameter.payStatus == 0">pay_status = #{parameter.payStatus,jdbcType=INTEGER},</if>
+            <if test="parameter.shippingStatus != null and parameter.shippingStatus != '' or parameter.shippingStatus == 0">shipping_status = #{parameter.shippingStatus,jdbcType=INTEGER},</if>
+            <if test="parameter.address != null and parameter.address != ''">address = #{parameter.address,jdbcType=VARCHAR},</if>
+            <if test="parameter.consignee != null and parameter.consignee != ''">consignee = #{parameter.consignee,jdbcType=VARCHAR},</if>
+            <if test="parameter.goodsId != null and parameter.goodsId != '' or parameter.goodsId == 0">goods_id = #{parameter.goodsId,jdbcType=BIGINT},</if>
+            <if test="parameter.goodsNumber != null and parameter.goodsNumber != '' or parameter.goodsNumber == 0">goods_number = #{parameter.goodsNumber,jdbcType=INTEGER},</if>
+            <if test="parameter.goodsPrice != null and parameter.goodsPrice != '' or parameter.goodsPrice == 0">goods_price = #{parameter.goodsPrice,jdbcType=DECIMAL},</if>
+            <if test="parameter.goodsAmount != null and parameter.goodsAmount != '' or parameter.goodsAmount == 0">goods_amount = #{parameter.goodsAmount,jdbcType=DECIMAL},</if>
+            <if test="parameter.shippingFee != null and parameter.shippingFee != '' or parameter.shippingFee == 0">shipping_fee = #{parameter.shippingFee,jdbcType=DECIMAL},</if>
+            <if test="parameter.orderAmount != null and parameter.orderAmount != '' or parameter.orderAmount == 0">order_amount = #{parameter.orderAmount,jdbcType=DECIMAL},</if>
+            <if test="parameter.couponId != null and parameter.couponId != '' or parameter.couponId == 0">coupon_id = #{parameter.couponId,jdbcType=BIGINT},</if>
+            <if test="parameter.couponPaid != null and parameter.couponPaid != '' or parameter.couponPaid == 0">coupon_paid = #{parameter.couponPaid,jdbcType=DECIMAL},</if>
+            <if test="parameter.moneyPaid != null and parameter.moneyPaid != '' or parameter.moneyPaid == 0">money_paid = #{parameter.moneyPaid,jdbcType=DECIMAL},</if>
+            <if test="parameter.payAmount != null and parameter.payAmount != '' or parameter.payAmount == 0">pay_amount = #{parameter.payAmount,jdbcType=DECIMAL},</if>
+            <if test="parameter.payTime != null and parameter.payTime != '' or parameter.payTime == 0">pay_time = #{parameter.payTime,jdbcType=BIGINT},</if>
+            <if test="parameter.confirmTime != null and parameter.confirmTime != '' or parameter.confirmTime == 0">confirm_time = #{parameter.confirmTime,jdbcType=BIGINT},</if>
+            <if test="parameter.updateTime != null and parameter.updateTime != '' or parameter.updateTime == 0">update_time = #{parameter.updateTime,jdbcType=BIGINT},</if>
+        </trim>
+        WHERE
+        <choose>
+            <when test="parameter.orderId != null and parameter.orderId != '' or parameter.orderId == 0">
+                order_id=#{parameter.orderId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                order_id=0
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeOrder" resultType="com.liudao51.shop.entity.po.TradeOrder">
         SELECT
             a.order_id,
             a.user_id,
@@ -21,17 +76,18 @@
             a.coupon_paid,
             a.money_paid,
             a.pay_amount,
-            a.add_time,
+            a.pay_time,
             a.confirm_time,
-            a.pay_time
+            a.create_time,
+            a.update_time
         FROM trade_order AS a
         WHERE 1=1
         <choose>
-            <when test="parameter.order_id != null and parameter.order_id != ''">
-                AND a.order_id=#{parameter.order_id}
+            <when test="parameter.orderId != null and parameter.orderId != '' or parameter.orderId == 0">
+                AND a.order_id=#{parameter.orderId,jdbcType=BIGINT}
             </when>
             <otherwise>
-                AND a.order_id='-1'
+                AND a.order_id=0
             </otherwise>
         </choose>
         LIMIT 0,1
@@ -56,12 +112,13 @@
             a.coupon_paid,
             a.money_paid,
             a.pay_amount,
-            a.add_time,
+            a.pay_time,
             a.confirm_time,
-            a.pay_time
+            a.create_time,
+            a.update_time
         FROM trade_order AS a
         WHERE 1=1
-        <if test="parameter.order_id != null and parameter.order_id != ''">
+        <if test="parameter.order_id != null and parameter.order_id != '' or parameter.order_id == 0">
             AND a.order_id=#{parameter.order_id}
         </if>
         LIMIT 0,1
@@ -86,30 +143,10 @@
             a.coupon_paid,
             a.money_paid,
             a.pay_amount,
-            a.add_time,
+            a.pay_time,
             a.confirm_time,
-            a.pay_time
+            a.create_time,
+            a.update_time
         FROM trade_order AS a
     </select>
-
-    <insert id="insert" parameterType="com.liudao51.shop.entity.po.TradeOrder">
-        INSERT INTO trade_order (
-            order_id, user_id, order_status,
-            pay_status, shipping_status, address,
-            consignee, goods_id, goods_number,
-            goods_price, goods_amount, shipping_fee,
-            order_amount, coupon_id, coupon_paid,
-            money_paid, pay_amount, add_time,
-            confirm_time, pay_time
-        )
-        VALUES (
-            #{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderStatus,jdbcType=INTEGER},
-            #{payStatus,jdbcType=INTEGER}, #{shippingStatus,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
-            #{consignee,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsNumber,jdbcType=INTEGER},
-            #{goodsPrice,jdbcType=DECIMAL}, #{goodsAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL},
-            #{orderAmount,jdbcType=DECIMAL}, #{couponId,jdbcType=BIGINT}, #{couponPaid,jdbcType=DECIMAL},
-            #{moneyPaid,jdbcType=DECIMAL}, #{payAmount,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP},
-            #{confirmTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}
-        )
-    </insert>
 </mapper>

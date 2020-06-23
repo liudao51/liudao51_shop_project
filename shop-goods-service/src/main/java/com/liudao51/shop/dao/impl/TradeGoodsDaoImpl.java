@@ -19,8 +19,13 @@ public class TradeGoodsDaoImpl implements ITradeGoodsDao {
     TradeGoodsMapper tradeGoodsMapper;
 
     @Override
-    public TradeGoods selectById(Map<String, Object> args) {
-        return tradeGoodsMapper.selectById(args);
+    public Integer updateById(TradeGoods goods) {
+        return tradeGoodsMapper.updateById(goods);
+    }
+
+    @Override
+    public TradeGoods selectById(TradeGoods goods) {
+        return tradeGoodsMapper.selectById(goods);
     }
 
     @Override
@@ -32,4 +37,5 @@ public class TradeGoodsDaoImpl implements ITradeGoodsDao {
     public List<TradeGoods> selectList(Map<String, Object> args) {
         return tradeGoodsMapper.selectList(args);
     }
+
 }

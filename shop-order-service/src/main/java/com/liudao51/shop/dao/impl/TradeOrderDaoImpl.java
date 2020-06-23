@@ -19,8 +19,18 @@ public class TradeOrderDaoImpl implements ITradeOrderDao {
     TradeOrderMapper tradeOrderMapper;
 
     @Override
-    public TradeOrder selectById(Map<String, Object> args) {
-        return tradeOrderMapper.selectById(args);
+    public Integer insertById(TradeOrder order) {
+        return tradeOrderMapper.insertById(order);
+    }
+
+    @Override
+    public Integer updateById(TradeOrder order) {
+        return tradeOrderMapper.updateById(order);
+    }
+
+    @Override
+    public TradeOrder selectById(TradeOrder order) {
+        return tradeOrderMapper.selectById(order);
     }
 
     @Override
@@ -33,9 +43,5 @@ public class TradeOrderDaoImpl implements ITradeOrderDao {
         return tradeOrderMapper.selectList(args);
     }
 
-    @Override
-    public int insert(TradeOrder order) {
-        return tradeOrderMapper.insert(order);
-    }
 
 }

@@ -22,7 +22,7 @@ public class NumericUtilsX {
      * @return
      */
     public static boolean isNumeric(Object val) {
-        if (!StringUtils.isEmpty(String.valueOf(val)) && !StringUtils.isBlank(String.valueOf(val))) {
+        if (null != val && !StringUtils.isEmpty(val.toString()) && !StringUtils.isBlank(val.toString())) {
             return val.toString().matches("^[-\\+]?[0-9.]*$");
         }
         return false;
@@ -36,7 +36,7 @@ public class NumericUtilsX {
      * @return
      */
     public static boolean isNumeric(Object val, Integer numericType) {
-        if (!StringUtils.isEmpty(String.valueOf(val)) && !StringUtils.isBlank(String.valueOf(val))) {
+        if (null != val && !StringUtils.isEmpty(String.valueOf(val)) && !StringUtils.isBlank(String.valueOf(val))) {
             switch (numericType) {
                 case 1:
                     return val.toString().matches("^[-\\+]?[0-9]*$");

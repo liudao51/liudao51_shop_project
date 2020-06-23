@@ -1,27 +1,23 @@
 package com.liudao51.shop.entity.po;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
-public class TradeUserMoneyLog extends TradeUserMoneyLogKey implements Serializable {
+@Data
+public class TradeUserMoneyLog implements Serializable {
+    private Long userMoneyLogId;
+
+    private Long userId;
+
+    private Long orderId;
+
+    private Integer moneyLogType;
+
     private BigDecimal useMoney;
 
-    private Date createTime;
+    private Long createTime;
 
-    public BigDecimal getUseMoney() {
-        return useMoney;
-    }
-
-    public void setUseMoney(BigDecimal useMoney) {
-        this.useMoney = useMoney;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    private Long updateTime;
 }

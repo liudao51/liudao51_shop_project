@@ -2,22 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liudao51.shop.mapper.TradeGoodsMapper">
 
-    <select id="selectById" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeGoods">
+    <update id="updateById" parameterType="com.liudao51.shop.entity.po.TradeGoods">
+        UPDATE trade_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parameter.goodsName != null and parameter.goodsName != ''">goods_name = #{parameter.goodsName,jdbcType=VARCHAR},</if>
+            <if test="parameter.goodsStock != null and parameter.goodsStock != '' or parameter.goodsStock == 0">goods_stock = #{parameter.goodsStock,jdbcType=INTEGER},</if>
+            <if test="parameter.goodsPrice != null and parameter.goodsPrice != '' or parameter.goodsPrice == 0">goods_price = #{parameter.goodsPrice,jdbcType=DECIMAL},</if>
+            <if test="parameter.goodsDesc != null and parameter.goodsDesc != ''">goods_desc = #{parameter.goodsDesc,jdbcType=VARCHAR},</if>
+            <if test="parameter.updateTime != null and parameter.updateTime != '' or parameter.updateTime == 0">update_time = #{parameter.updateTime,jdbcType=BIGINT},</if>
+        </trim>
+        WHERE
+        <choose>
+            <when test="parameter.goodsId != null and parameter.goodsId != '' or parameter.goodsId == 0">
+                goods_id=#{parameter.goodsId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                goods_id=0
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeGoods" resultType="com.liudao51.shop.entity.po.TradeGoods">
         SELECT
             a.goods_id,
             a.goods_name,
-            a.goods_number,
+            a.goods_stock,
             a.goods_price,
             a.goods_desc,
-            a.add_time
+            a.create_time,
+            a.update_time
         FROM trade_goods AS a
-        WHERE 1=1
+        WHERE
         <choose>
-            <when test="parameter.goods_id != null and parameter.goods_id != ''">
-                AND a.goods_id=#{parameter.goods_id}
+            <when test="parameter.goodsId != null and parameter.goodsId != '' or parameter.goodsId == 0">
+                a.goods_id=#{parameter.goodsId,jdbcType=BIGINT}
             </when>
             <otherwise>
-                AND a.goods_id='-1'
+                a.goods_id=0
             </otherwise>
         </choose>
         LIMIT 0,1
@@ -27,13 +48,14 @@
         SELECT
             a.goods_id,
             a.goods_name,
-            a.goods_number,
+            a.goods_stock,
             a.goods_price,
             a.goods_desc,
-            a.add_time
+            a.create_time,
+            a.update_time
         FROM trade_goods AS a
         WHERE 1=1
-        <if test="parameter.goods_id != null and parameter.goods_id != ''">
+        <if test="parameter.goods_id != null and parameter.goods_id != '' or parameter.goods_id == 0">
             AND a.goods_id=#{parameter.goods_id}
         </if>
         LIMIT 0,1
@@ -43,10 +65,11 @@
         SELECT
             a.goods_id,
             a.goods_name,
-            a.goods_number,
+            a.goods_stock,
             a.goods_price,
             a.goods_desc,
-            a.add_time
+            a.create_time,
+            a.update_time
         FROM trade_goods AS a
     </select>
 </mapper>

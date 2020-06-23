@@ -1,66 +1,33 @@
 package com.liudao51.shop.entity.po;
 
-import java.io.Serializable;
-import java.util.Date;
+import lombok.Data;
 
-public class TradeMqConsumerLog extends TradeMqConsumerLogKey implements Serializable {
+import java.io.Serializable;
+
+@Data
+public class TradeMqConsumerLog implements Serializable {
+
+    private Long mqConsumerLogId;
+
     private String msgId;
+
+    private String msgGroupName;
+
+    private String msgTag;
+
+    private String msgKey;
 
     private String msgBody;
 
     private Integer consumerStatus;
 
-    private Integer consumerTimes;
+    private Integer consumerCount;
 
-    private Date consumerTimestamp;
+    private Long consumerTime;
 
     private String remark;
 
-    public String getMsgId() {
-        return msgId;
-    }
+    private Long createTime;
 
-    public void setMsgId(String msgId) {
-        this.msgId = msgId == null ? null : msgId.trim();
-    }
-
-    public String getMsgBody() {
-        return msgBody;
-    }
-
-    public void setMsgBody(String msgBody) {
-        this.msgBody = msgBody == null ? null : msgBody.trim();
-    }
-
-    public Integer getConsumerStatus() {
-        return consumerStatus;
-    }
-
-    public void setConsumerStatus(Integer consumerStatus) {
-        this.consumerStatus = consumerStatus;
-    }
-
-    public Integer getConsumerTimes() {
-        return consumerTimes;
-    }
-
-    public void setConsumerTimes(Integer consumerTimes) {
-        this.consumerTimes = consumerTimes;
-    }
-
-    public Date getConsumerTimestamp() {
-        return consumerTimestamp;
-    }
-
-    public void setConsumerTimestamp(Date consumerTimestamp) {
-        this.consumerTimestamp = consumerTimestamp;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+    private Long updateTime;
 }

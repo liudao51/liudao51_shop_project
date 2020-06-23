@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liudao51.shop.mapper.TradeMqConsumerLogMapper">
+
+    <insert id="insertById" parameterType="com.liudao51.shop.entity.po.TradeMqConsumerLog">
+        INSERT INTO trade_mq_consumer_log (
+            mq_consumer_log_id, msg_id, msg_group_name,
+            msg_tag, msg_key, msg_body,
+            consumer_status, consumer_count, consumer_time,
+            remark, create_time, update_time
+        ) VALUES (
+            #{parameter.mqConsumerLogId,jdbcType=BIGINT}, #{parameter.msgId,jdbcType=BIGINT}, #{parameter.msgGroupName,jdbcType=VARCHAR},
+            #{parameter.msgTag,jdbcType=VARCHAR}, #{parameter.msgKey,jdbcType=VARCHAR}, #{parameter.msgBody,jdbcType=VARCHAR},
+            #{parameter.consumerStatus,jdbcType=INTEGER}, #{parameter.consumerCount,jdbcType=INTEGER}, #{parameter.consumerTime,jdbcType=BIGINT},
+            #{parameter.remark,jdbcType=VARCHAR},#{parameter.createTime,jdbcType=BIGINT}, #{parameter.updateTime,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <update id="updateById" parameterType="com.liudao51.shop.entity.po.TradeMqConsumerLog">
+        UPDATE trade_mq_consumer_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parameter.msgId != null and parameter.msgId != '' or parameter.msgId == 0">msg_id = #{parameter.msgId,jdbcType=BIGINT},</if>
+            <if test="parameter.msgGroupName != null and parameter.msgGroupName != '' or parameter.msgGroupName == 0">msg_group_name = #{parameter.msgGroupName,jdbcType=VARCHAR},</if>
+            <if test="parameter.msgTag != null and parameter.msgTag != '' or parameter.msgTag == 0">msg_tag = #{parameter.msgTag,jdbcType=VARCHAR},</if>
+            <if test="parameter.msgKey != null and parameter.msgKey != '' or parameter.msgKey == 0">msg_key = #{parameter.msgKey,jdbcType=VARCHAR},</if>
+            <if test="parameter.msgBody != null and parameter.msgBody != '' or parameter.msgBody == 0">msg_body = #{parameter.msgBody,jdbcType=VARCHAR},</if>
+            <if test="parameter.consumerStatus != null and parameter.consumerStatus != '' or parameter.consumerStatus == 0">consumer_status = #{parameter.consumerStatus,jdbcType=INTEGER},</if>
+            <if test="parameter.consumerCount != null and parameter.consumerCount != '' or parameter.consumerCount == 0">consumer_count = #{parameter.consumerCount,jdbcType=INTEGER},</if>
+            <if test="parameter.consumerTime != null and parameter.consumerTime != '' or parameter.consumerTime == 0">consumer_time = #{parameter.consumerTime,jdbcType=BIGINT},</if>
+            <if test="parameter.remark != null and parameter.remark != '' or parameter.remark == 0">remark = #{parameter.remark,jdbcType=VARCHAR},</if>
+            <if test="parameter.createTime != null and parameter.createTime != '' or parameter.createTime == 0">create_time = #{parameter.createTime,jdbcType=BIGINT},</if>
+            <if test="parameter.updateTime != null and parameter.updateTime != '' or parameter.updateTime == 0">update_time = #{parameter.updateTime,jdbcType=BIGINT},</if>
+        </trim>
+        WHERE
+        <choose>
+            <when test="parameter.mqConsumerLogId != null and parameter.mqConsumerLogId != '' or parameter.mqConsumerLogId == 0">
+                mq_consumer_log_id=#{parameter.mqConsumerLogId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                coupon_id=0
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="selectById" parameterType="com.liudao51.shop.entity.po.TradeMqConsumerLog" resultType="com.liudao51.shop.entity.po.TradeMqConsumerLog">
+        SELECT
+            a.mq_consumer_log_id,
+            a.msg_id,
+            a.msg_group_name,
+            a.msg_tag,
+            a.msg_key,
+            a.msg_body,
+            a.consumer_status,
+            a.consumer_count,
+            a.consumer_time,
+            a.remark,
+            a.create_time,
+            a.update_time
+        FROM trade_mq_consumer_log AS a
+        WHERE 1=1
+        <choose>
+            <when test="parameter.mqConsumerLogId != null and parameter.mqConsumerLogId != '' or parameter.mqConsumerLogId == 0">
+                AND a.mq_consumer_log_id=#{parameter.mqConsumerLogId,jdbcType=BIGINT}
+            </when>
+            <otherwise>
+                AND a.mq_consumer_log_id=0
+            </otherwise>
+        </choose>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectOne" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeMqConsumerLog">
+        SELECT
+            a.mq_consumer_log_id,
+            a.msg_id,
+            a.msg_group_name,
+            a.msg_tag,
+            a.msg_key,
+            a.msg_body,
+            a.consumer_status,
+            a.consumer_count,
+            a.consumer_time,
+            a.remark,
+            a.create_time,
+            a.update_time
+        FROM trade_mq_consumer_log AS a
+        WHERE 1=1
+        <if test="parameter.mq_consumer_log_id != null and parameter.mq_consumer_log_id != '' or parameter.mq_consumer_log_id == 0">
+            AND a.mq_consumer_log_id=#{parameter.mq_consumer_log_id}
+        </if>
+        <if test="parameter.msg_group_name != null and parameter.msg_group_name != '' or parameter.msg_group_name == 0">
+            AND a.msg_group_name=#{parameter.msg_group_name}
+        </if>
+        <if test="parameter.msg_id != null and parameter.msg_id != '' or parameter.msg_id == 0">
+            AND a.msg_id=#{parameter.msg_id}
+        </if>
+        <if test="parameter.msg_tag != null and parameter.msg_tag != '' or parameter.msg_tag == 0">
+            AND a.msg_tag=#{parameter.msg_tag}
+        </if>
+        <if test="parameter.msg_key != null and parameter.msg_key != '' or parameter.msg_key == 0">
+            AND a.msg_key=#{parameter.msg_key}
+        </if>
+        LIMIT 0,1
+    </select>
+
+    <select id="selectList" parameterType="map" resultType="com.liudao51.shop.entity.po.TradeMqConsumerLog">
+        SELECT
+            a.mq_consumer_log_id,
+            a.msg_id,
+            a.msg_group_name,
+            a.msg_tag,
+            a.msg_key,
+            a.msg_body,
+            a.consumer_status,
+            a.consumer_count,
+            a.consumer_time,
+            a.remark,
+            a.create_time,
+            a.update_time
+        FROM trade_mq_consumer_log AS a
+    </select>
+</mapper>

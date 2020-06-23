@@ -75,6 +75,12 @@
             <artifactId>druid</artifactId>
         </dependency>
 
+        <!--RocketMQ-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- shop-common -->
         <dependency>
             <groupId>com.liudao51.shop</groupId>

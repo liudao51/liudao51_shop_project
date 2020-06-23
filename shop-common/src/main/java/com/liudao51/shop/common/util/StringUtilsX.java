@@ -9,6 +9,24 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class StringUtilsX extends StringUtils {
 
+    public static Boolean isEmpty(Object val){
+        return val == null || val.toString().length() == 0;
+    }
+
+    public static Boolean isBlank(Object val){
+        int strLen;
+        if(val != null && (strLen = val.toString().length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if(!Character.isWhitespace(val.toString().charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * function: URL字符串解码
      *
