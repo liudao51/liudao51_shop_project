@@ -43,10 +43,11 @@ public enum AppCode {
     COUPON_USE_STATUS_NO_USE(0, "NO_USE", "优惠券未使用"),
     COUPON_USE_STATUS_ALREADY_USE(1, "ALREADY_USE", "优惠券已使用"),
 
-    //消息处理状态
-    MQ_CONSUMER_STATUS_PROCESSING(0, "PROCESSING", "正在处理"),
-    MQ_CONSUMER_STATUS_SUCCESS(1, "SUCCESS", "处理成功"),
-    MQ_CONSUMER_STATUS_FAIL(2, "FAIL", "处理失败"),
+    //消息处理状态(0未处理, 1处理成功, 2处理失败, 3正在处理)
+    MQ_CONSUMER_STATUS_NO_PROCESS(0, "NO_PROCESS", "未处理"),
+    MQ_CONSUMER_STATUS_PROCESS_SUCCESS(1, "PROCESS_SUCCESS", "处理成功"),
+    MQ_CONSUMER_STATUS_PROCESS_FAIL(2, "PROCESS_FAIL", "处理失败"),
+    MQ_CONSUMER_STATUS_PROCESSING(3, "PROCESSING", "正在处理"),
     MQ_CONSUMER_COUNT_MAX(3, "CONSUMER_COUNT_MAX", "允许最大的失败次数"),
 
     //MQ消息(作为默认值,最好与application.properties文件中的app.mq.xxx值保持一致)

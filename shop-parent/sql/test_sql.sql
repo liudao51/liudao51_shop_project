@@ -7,9 +7,10 @@ TRUNCATE trade_user_money_log;
 
 UPDATE trade_user SET user_money=1000;
 UPDATE trade_goods SET goods_stock=1000;
-UPDATE trade_coupon SET is_used=0,order_id=0;
+UPDATE trade_coupon SET use_status=0,use_time=0,order_id=0;
 
 SELECT * FROM trade_order;
 SELECT * FROM trade_goods;
 SELECT * FROM trade_coupon;
 SELECT * FROM trade_goods_stock_log;
+SELECT * FROM trade_mq_consumer_log;

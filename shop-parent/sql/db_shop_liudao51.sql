@@ -68,7 +68,7 @@ CREATE TABLE `trade_mq_consumer_log` (
   `msg_tag` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '消息tag',
   `msg_key` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '消息key',
   `msg_body` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '消息内容体',
-  `consumer_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '消费者处理状态(0正在处理, 1处理成功, 2处理失败)',
+  `consumer_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '消费者处理状态(0未处理, 1处理成功, 2处理失败, 3正在处理)',
   `consumer_count` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '消费次数',
   `consumer_time` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT '消费时间',
   `remark` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '备注',

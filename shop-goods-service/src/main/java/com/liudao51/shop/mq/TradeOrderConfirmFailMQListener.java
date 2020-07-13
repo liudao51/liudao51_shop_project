@@ -92,7 +92,7 @@ public class TradeOrderConfirmFailMQListener implements RocketMQListener<Message
                 }
             } else { //有消费记录
                 //处理过且成功
-                if (AppCode.MQ_CONSUMER_STATUS_SUCCESS.getCode().equals(tradeMqConsumerLog.getConsumerStatus())) {
+                if (AppCode.MQ_CONSUMER_STATUS_PROCESS_SUCCESS.getCode().equals(tradeMqConsumerLog.getConsumerStatus())) {
                     TradeGoodsLogUtilsX.debug("消息：" + msgId + ",已经处理过");
                     return;
                 }
@@ -102,7 +102,7 @@ public class TradeOrderConfirmFailMQListener implements RocketMQListener<Message
                     return;
                 }
                 //处理失败
-                if (AppCode.MQ_CONSUMER_STATUS_FAIL.getCode().equals(tradeMqConsumerLog.getConsumerStatus())) {
+                if (AppCode.MQ_CONSUMER_STATUS_PROCESS_FAIL.getCode().equals(tradeMqConsumerLog.getConsumerStatus())) {
                     Integer times = tradeMqConsumerLog.getConsumerCount();
                     if (times > AppCode.MQ_CONSUMER_COUNT_MAX.getCode()) {
                         TradeGoodsLogUtilsX.debug("消息：" + msgId + ",处理处数不能超过" + AppCode.MQ_CONSUMER_COUNT_MAX.getCode() + "次");
@@ -132,7 +132,7 @@ public class TradeOrderConfirmFailMQListener implements RocketMQListener<Message
             }
 
             //4.更新消费处理状态为处理成功
-            tradeMqConsumerLog.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_SUCCESS.getCode());
+            tradeMqConsumerLog.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_PROCESS_SUCCESS.getCode());
             tradeMqConsumerLog.setConsumerTime(currentTime);
             tradeMqConsumerLog.setUpdateTime(currentTime + 1); //防止跟前面的更新时间一样,这里时间要加1
             affectedRows = tradeMqConsumerLogDao.updateById(tradeMqConsumerLog);
@@ -158,7 +158,7 @@ public class TradeOrderConfirmFailMQListener implements RocketMQListener<Message
                     tradeMqConsumerLog2.setMsgTag(tag);
                     tradeMqConsumerLog2.setMsgKey(key);
                     tradeMqConsumerLog2.setMsgBody(body);
-                    tradeMqConsumerLog2.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_FAIL.getCode());
+                    tradeMqConsumerLog2.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_PROCESS_FAIL.getCode());
                     tradeMqConsumerLog2.setConsumerCount(0);
                     tradeMqConsumerLog2.setConsumerTime(0L);
                     tradeMqConsumerLog2.setRemark("订单确认失败");
@@ -169,7 +169,7 @@ public class TradeOrderConfirmFailMQListener implements RocketMQListener<Message
                         ExceptionUtilsX.cast(ErrorCode.MQ_CONSUMER_STATUS_INSERT_ERROR);
                     }
                 } else {
-                    tradeMqConsumerLog2.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_FAIL.getCode());
+                    tradeMqConsumerLog2.setConsumerStatus(AppCode.MQ_CONSUMER_STATUS_PROCESS_FAIL.getCode());
                     tradeMqConsumerLog2.setConsumerCount(tradeMqConsumerLog2.getConsumerCount() + 1); //失败次数累加
                     tradeMqConsumerLog2.setUpdateTime(currentTime + 1);
                     affectedRows = tradeMqConsumerLogDao.updateById(tradeMqConsumerLog2);
